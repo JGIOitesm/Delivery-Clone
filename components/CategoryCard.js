@@ -8,7 +8,7 @@ export default function CategoryCard({imgUrl, title}) {
             uri:imgUrl
         }}
         className='h-20 w-20 rounded'/>
-        <Text className='absolute bottom-1 left-1 text-white font-bold'>{title}</Text>
+        <Text className='absolute bottom-1 left-1 text-white font-bold bg-black'>{title}</Text>
     </TouchableOpacity>
   )
 }

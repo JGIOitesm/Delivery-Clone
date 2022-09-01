@@ -1,13 +1,14 @@
 import { View, Text,SafeAreaView, Image, TextInput, ScrollView } from 'react-native'
-import React, {useLayoutEffect} from 'react'
+import React, {useEffect, useLayoutEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
-import {UserIcon, ChevronDownIcon, SearchIcon, AdjustmentsIcon} from 'react-native-heroicons/outline'
+import {UserIcon, ChevronDownIcon, SearchIcon, AdjustmentsIcon} from 'react-native-heroicons/solid'
 import Categories from '../components/categories'
-import CategoryCard from '../components/CategoryCard'
 import FeaturedRow from '../components/FeaturedRow'
+import SanityClient from '../sanity'
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const [featuredCategories, setFeaturedCategories] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -15,8 +16,22 @@ export default function HomeScreen() {
     });
   }, [])
 
+  useEffect(()=>{
+    SanityClient.fetch(`
+    *[_type == 'Featured'] {
+      ...,
+      Restaurant[]->{
+        ...,
+        Dish[]->
+      }
+    }
+    `).then((data) => {
+      setFeaturedCategories(data);
+    })
+  }, [])
+
   return (
-    <SafeAreaView className = 'bg-white pt-5'>
+    <SafeAreaView className = 'bg-gray-900 pt-5'>
       <View>
         {/*Header*/}
         <View className ='flex-row pb-3 items-center mx-4 space-x-2'>
@@ -30,12 +45,12 @@ export default function HomeScreen() {
             <Text className='font-bold text-gray-400 text-xs'>
               Deliver Now
             </Text>
-            <Text className= 'font-bold text-xl'>
+            <Text className= 'font-bold text-xl text-white'>
               Current Location
-              <ChevronDownIcon size={20} color='#00CCBB'/>
+              <ChevronDownIcon size={20} color='red'/>
             </Text>
           </View>
-          <UserIcon size={35} color='#00CCBB'/>
+          <UserIcon size={35} color='red'/>
         </View>
         {/*Search8*/}
         <View className='flex-row items-center space-x-2 pb-2 mx-4'>
@@ -44,12 +59,12 @@ export default function HomeScreen() {
             <TextInput placeholder='Restaurants and cuisines'
             keyboardType='default'/>
           </View>
-          <AdjustmentsIcon color = '#00CCBB'/>
+          <AdjustmentsIcon color = 'red'/>
         </View>
       </View>
       {/*Body*/}
       <ScrollView 
-      className = 'bg-gray-100 flex-1'
+      className = 'bg-gray-800 flex-1'
       contentContainerStyle={{
         paddingBottom:100,
       }}
@@ -58,23 +73,15 @@ export default function HomeScreen() {
           <Categories/>
         {/* Featured rows */}
         {/* Featured */}
+
+        {featuredCategories?.map((categories) => (
           <FeaturedRow 
-          id = '123'
-          title = 'Featured'
-          description = 'Paid placements from our partners'
+          key={categories._id}
+          id = {categories._id}
+          title = {categories.name}
+          description = {categories.short_description}
           />
-          {/* Discounts */}
-           <FeaturedRow 
-          id = '1234'
-          title = 'Discounts'
-          description = 'Paid placements from our partners'
-          />
-          {/* Offers near you */}
-           <FeaturedRow 
-          id = '12345'
-          title = 'Offers near you'
-          description = 'Paid placements from our partners'
-          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   )
