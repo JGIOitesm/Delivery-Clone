@@ -59,7 +59,7 @@ export default function RestaurantScreen() {
                 source = {{
                     uri: urlFor(imgUrl).url(),
                 }}
-                className='w.full h-56 bg-gray-300 p-4'/>
+                className='w-full h-56 bg-gray-300 p-4'/>
                 <TouchableOpacity 
                 onPress={navigation.goBack}
                 className = 'absolute top-14 left-5 p-2 bg-black rounded-full'>
@@ -83,7 +83,9 @@ export default function RestaurantScreen() {
                     </View>
                     <Text className='text-gray-300 mt-2 pb-4'>{short_description}</Text>
                 </View>
-                <TouchableOpacity className='flex-row items-center space-x-2 p-4 border-y border-gray-300'>
+                <TouchableOpacity 
+                className='flex-row items-center space-x-2 p-4 border-y border-gray-300'
+                onPress={()=>navigation.navigate('Feedback')}>
                     <QuestionMarkCircleIcon color='gray' opacity={0.5} size={22}/>
                     <Text className='pl-2 flex-1 text-md font-bold text-gray-500'>Have food allergy?</Text>
                     <ChevronRightIcon color = 'red'/>
@@ -99,7 +101,9 @@ export default function RestaurantScreen() {
                     name = {dish.name}
                     description = {dish.short_description}
                     price={dish.price}
-                    image={dish.image}/>
+                    image={dish.image}
+                    restaurantName ={title}
+                    />
                 ))}
             </View>
         </ScrollView>

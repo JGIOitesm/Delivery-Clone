@@ -1,4 +1,4 @@
-import { View, Text,SafeAreaView, Image, TextInput, ScrollView } from 'react-native'
+import { View, Text,SafeAreaView, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import React, {useEffect, useLayoutEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import {UserIcon, ChevronDownIcon, SearchIcon, AdjustmentsIcon} from 'react-native-heroicons/solid'
@@ -43,14 +43,16 @@ export default function HomeScreen() {
           />
           <View className = 'flex-1'>
             <Text className='font-bold text-gray-400 text-xs'>
-              Deliver Now
+              Snack'Well
             </Text>
             <Text className= 'font-bold text-xl text-white'>
               Current Location
               <ChevronDownIcon size={20} color='red'/>
             </Text>
           </View>
-          <UserIcon size={35} color='red'/>
+          <TouchableOpacity onPress={()=>navigation.navigate('User')}>
+            <UserIcon size={35} color='red'/>
+          </TouchableOpacity>
         </View>
         {/*Search8*/}
         <View className='flex-row items-center space-x-2 pb-2 mx-4'>

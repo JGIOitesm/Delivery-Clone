@@ -38,7 +38,7 @@ export default function BasketScreen() {
         <View className='p-5 border-b border-red-900 bg-gray-900 shadow-xs'>
           <View>
             <Text className = 'text-lg font-bold text-white text-center'>Basket</Text>
-            <Text className = 'text-center text-gray-400'>{restaurant.title}</Text>
+            {/* <Text className = 'text-center text-gray-400'>{restaurant.title}</Text> */}
           </View>
           <TouchableOpacity 
           onPress={navigation.goBack}
@@ -68,7 +68,11 @@ export default function BasketScreen() {
               <Image
               source={{uri:urlFor(items[0]?.image).url()}}
               className='h-12 w-12 rounded-full'/>
-              <Text className = 'flex-1 text-white'>{items[0]?.name}</Text>
+              <View className = 'flex-1'>
+                <Text className = ' text-white'>{items[0]?.name}</Text>
+                <Text className = ' text-white text-xs'>{items[0]?.restaurantName}
+              </Text>
+              </View>
               <TouchableOpacity>
               <PlusCircleIcon 
                     onPress={()=>dispatch(addToBasketIndex({id: key}))}
@@ -97,9 +101,9 @@ export default function BasketScreen() {
             <Text className = 'text-white font-extrabold'>$ {(basketTotal*1.1).toFixed(2)}</Text>
           </View>
           <TouchableOpacity 
-          onPress={()=>navigation.navigate('PreparingOrderScreen')}
-          className='rounded-lg bg-red-600 p-4'>
-            <Text className='text-center text-white text-lg font-bold'>Place Order</Text>
+          onPress={items.length !== 0 ? ()=>navigation.navigate('PreparingOrderScreen'): null}
+          className={items.length !== 0 ? 'rounded-lg bg-red-600 p-4': 'rounded-lg bg-gray-600 p-4'}>
+            <Text className='text-center text-white text-lg font-bold'>{items.length !== 0 ? 'Place Order': 'Select food to order first'}</Text>
           </TouchableOpacity>
         </View>
       </View>
