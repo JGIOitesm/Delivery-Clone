@@ -62,7 +62,7 @@ export default function CategoryScreen() {
         >
           {/* RestaurantCards */}
           {(restaurantsFilter?.map((restaurant) => (
-            <View className = 'mb-5'>
+            <View className = 'mb-5' key = {restaurant._id}>
               <RestaurantCards
               key = {restaurant._id}
               id = {restaurant._id}

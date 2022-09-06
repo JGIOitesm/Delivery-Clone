@@ -35,12 +35,12 @@ export default function RestaurantCards({
             lat,
         })
     }}
-    className='bg-gray-600 mr-3 shadow'>
+    className='bg-red-900 mr-3 shadow rounded-xl'>
         <Image 
         source = {{
             uri:urlFor(imgUrl).url()
         }}
-        className='h-36 w-70 rounded-sm'/>
+        className='h-36 w-70 rounded-t-xl'/>
         <View className = 'px-3 pb-4'>
             <Text className='font-bold text-lg pt-2 text-white'>
                 {title}

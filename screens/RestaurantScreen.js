@@ -76,7 +76,7 @@ export default function RestaurantScreen() {
                                 <Text className='text-red-500'>{rating} · {genre}</Text>
                             </Text>
                             <View className = 'flex-row items-center space-x-1'>
-                                <LocationMarkerIcon color='gray' opacity={0.5} size={22}/>
+                                <LocationMarkerIcon color='white' opacity={0.5} size={22}/>
                                 <Text className='text-xs text-gray-200'>Nearby {address}</Text>
                             </View>
                         </View>
@@ -86,13 +86,13 @@ export default function RestaurantScreen() {
                 <TouchableOpacity 
                 className='flex-row items-center space-x-2 p-4 border-y border-gray-300'
                 onPress={()=>navigation.navigate('Feedback')}>
-                    <QuestionMarkCircleIcon color='gray' opacity={0.5} size={22}/>
-                    <Text className='pl-2 flex-1 text-md font-bold text-gray-500'>Have food allergy?</Text>
+                    <QuestionMarkCircleIcon color='white' opacity={0.5} size={22}/>
+                    <Text className='pl-2 flex-1 text-md font-bold text-gray-300'>Have food allergy?</Text>
                     <ChevronRightIcon color = 'red'/>
                 </TouchableOpacity>
             </View>
             <View className='pb-80'>
-                <Text className ='px-4 pt-6 mb-3 font-bold text-xl'>Menu</Text>
+                <Text className ='px-4 pt-6 mb-3 font-extrabold text-xl text-white'>Menu</Text>
                 {/* Dishrows */}
                 {dishes?.map(dish =>(
                     <DishRow

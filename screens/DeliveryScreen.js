@@ -13,7 +13,6 @@ import { useLayoutEffect } from 'react';
 export default function DeliveryScreen() {
     const navigation = useNavigation();
     const restaurant = useSelector(selectRestaurant);
-    console.log(restaurant)
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown:false,
@@ -28,7 +27,7 @@ export default function DeliveryScreen() {
                 </TouchableOpacity>
                 <Text className = 'font-light text-white text-lg'>Order Help</Text>
             </View>
-            <View className = 'bg-black mx-5 my-2 rounded-md p-6 z-50 shadow-md'>
+            <View className = 'bg-gray-900 mx-5 my-2 rounded-md p-6 z-50 shadow-md'>
                 <View className='flex-row justify-between'>
                     <View>
                     <Text className = 'text-lg text-gray-400'> Estimated Arrival</Text>
